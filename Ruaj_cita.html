@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruaj Alquimia en Movimiento</title>
+  <style>
+    body {
+      font-family: 'Helvetica', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background-color: #6FB1FC;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .accordion {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+    .accordion-header {
+      padding: 1rem;
+      background-color: #d5e8f7;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 1px solid #ccc;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1rem;
+    }
+    .accordion-content p {
+      margin: 1rem 0;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #6FB1FC;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #579dd1;
+    }
+    #successMessage {
+      margin-top: 1rem;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+    #terapiaNecesaria {
+      display: none;
+    }
+    img {
+      max-width: 120px;
+      margin: 1rem auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  Ruaj Alquimia en Movimiento
+</header>
+
+<div class="container">
+  
+  <!-- Logo -->
+  <img src="https://raw.githubusercontent.com/TU-USUARIO-GITHUB/TU-REPOSITORIO/main/logo.png" alt="Logo Ruaj Alquimia">
+
+  <!-- Cursos -->
+  <div class="accordion">
+    <div class="accordion-header">Iniciación al Tarot</div>
+    <div class="accordion-content">
+      <p>Descubre los fundamentos del Tarot como herramienta de autoconocimiento.</p>
+    </div>
+    <div class="accordion-header">Letras Hebreas</div>
+    <div class="accordion-content">
+      <p>Estudio profundo del significado energético y espiritual de cada letra hebrea.</p>
+    </div>
+    <div class="accordion-header">Numerología</div>
+    <div class="accordion-content">
+      <p>Aprende a interpretar los números como guías de tu vida y destino.</p>
+    </div>
+    <div class="accordion-header">Geometría Sagrada</div>
+    <div class="accordion-content">
+      <p>Conoce los patrones universales que sustentan toda la creación.</p>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <form id="agendamientoForm">
+    <label for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="telefono">Teléfono</label>
+    <input type="tel" id="telefono" name="telefono" required>
+
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="fechaNacimiento">Fecha de nacimiento</label>
+    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+
+    <label for="recomendadoPor">Persona recomendada</label>
+    <input type="text" id="recomendadoPor" name="recomendadoPor">
+
+    <label for="telefonoContacto">Teléfono de contacto</label>
+    <input type="tel" id="telefonoContacto" name="telefonoContacto">
+
+    <label for="curso">Curso</label>
+    <select id="curso" name="curso">
+      <option value="">Selecciona uno</option>
+      <option>Iniciación al Tarot</option>
+      <option>Letras Hebreas</option>
+      <option>Numerología</option>
+      <option>Geometría Sagrada</option>
+    </select>
+
+    <label for="solicitaTerapia">¿Deseas solicitar terapia?</label>
+    <select id="solicitaTerapia" name="solicitaTerapia">
+      <option value="">Selecciona</option>
+      <option value="Sí">Sí</option>
+      <option value="No">No</option>
+    </select>
+
+    <div id="terapiaNecesaria">
+      <label for="tipoTerapia">¿Qué tipo de terapia necesitas?</label>
+      <input type="text" id="tipoTerapia" name="tipoTerapia">
+    </div>
+
+    <label for="comentarios">Comentarios adicionales</label>
+    <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+
+    <button type="submit">Enviar información</button>
+    <div id="successMessage">👍 Gracias por tu información 🎉 Te contactaremos pronto.</div>
+  </form>
+
+</div>
+
+<!-- Firebase y lógica de formulario -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC7GyRAsEDQgLCl3rgqL7KqWhvyYy-Uzuk",
+    authDomain: "ruaj-alquimia.firebaseapp.com",
+    projectId: "ruaj-alquimia",
+    storageBucket: "ruaj-alquimia.firebasestorage.app",
+    messagingSenderId: "368475155222",
+    appId: "1:368475155222:web:42533396332c65d114be37",
+    measurementId: "G-SGF3W2Q6RV"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Acordeón
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const open = content.style.maxHeight;
+      document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
+      if (!open) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
+  });
+
+  // Mostrar/ocultar campo de terapia
+  const solicitaTerapia = document.getElementById('solicitaTerapia');
+  const terapiaNecesaria = document.getElementById('terapiaNecesaria');
+
+  solicitaTerapia.addEventListener('change', function() {
+    if (this.value === 'Sí') {
+      terapiaNecesaria.style.display = 'block';
+      document.getElementById('tipoTerapia').setAttribute('required', 'required');
+    } else {
+      terapiaNecesaria.style.display = 'none';
+      document.getElementById('tipoTerapia').removeAttribute('required');
+      document.getElementById('tipoTerapia').value = '';
+    }
+  });
+
+  // Enviar formulario
+  const form = document.getElementById('agendamientoForm');
+  const successMessage = document.getElementById('successMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    data.timestamp = serverTimestamp();
+
+    try {
+      await addDoc(collection(db, "agendamientos"), data);
+
+      successMessage.style.display = 'block';
+      form.reset();
+      terapiaNecesaria.style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+      }, 5000);
+    } catch (error) {
+      alert('Hubo un error al enviar. Intenta de nuevo.');
+      console.error(error);
+    }
+  });
+</script>
+
+</body>
+</html>
